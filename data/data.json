@@ -1,9 +1,9 @@
 {
   "nodes": [
-    { "name": "node1", "group": 1 },
-    { "name": "node2", "group": 2 },
-    { "name": "node3", "group": 2 },
-    { "name": "node4", "group": 3 }
+    { "name": "Tunnl B.V", "group": 1 },
+    { "name": "Kizi.com", "group": 2 },
+    { "name": "Huz", "group": 2 },
+    { "name": "gamesgames.com", "group": 3 }
   ],
   "links": [
     { "source": 2, "target": 1, "weight": 1 },

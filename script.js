@@ -1,5 +1,5 @@
-var width = 960,
-  height = 500;
+var width = 2000,
+  height = 1000;
 
 var svg = d3
   .select("body")
@@ -10,11 +10,11 @@ var svg = d3
 var force = d3.layout
   .force()
   .gravity(0.05)
-  .distance(100)
+  .distance(200)
   .charge(-100)
   .size([width, height]);
 
-d3.json("graphFile.json", function (json) {
+d3.json("./data/data.json", function (json) {
   force.nodes(json.nodes).links(json.links).start();
 
   var link = svg
@@ -35,7 +35,7 @@ d3.json("graphFile.json", function (json) {
     .attr("class", "node")
     .call(force.drag);
 
-  node.append("circle").attr("r", "5");
+  node.append("circle").attr("r", "10");
 
   node
     .append("text")
@@ -65,3 +65,32 @@ d3.json("graphFile.json", function (json) {
     });
   });
 });
+
+// create a tooltip
+
+// create a tooltip
+var Tooltip = d3
+  .select("#div_template")
+  .append("div")
+  .style("opacity", 0)
+  .attr("class", "tooltip")
+  .style("background-color", "white")
+  .style("border", "solid")
+  .style("border-width", "2px")
+  .style("border-radius", "5px")
+  .style("padding", "5px");
+
+// Three function that change the tooltip when user hover / move / leave a cell
+var mouseover = function (d) {
+  Tooltip.style("opacity", 1);
+  d3.select(this).style("stroke", "black").style("opacity", 1);
+};
+var mousemove = function (d) {
+  Tooltip.html("The exact value of<br>this cell is: " + d.value)
+    .style("left", d3.mouse(this)[0] + 70 + "px")
+    .style("top", d3.mouse(this)[1] + "px");
+};
+var mouseleave = function (d) {
+  Tooltip.style("opacity", 0);
+  d3.select(this).style("stroke", "none").style("opacity", 0.8);
+};
